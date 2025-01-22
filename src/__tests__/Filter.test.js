@@ -44,6 +44,7 @@ test("the input field acts as a controlled input", () => {
 // Shopping List
 test("the shopping list displays all items when initially rendered", () => {
   const { container } = render(<ShoppingList items={testData} />);
+  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   expect(container.querySelector(".Items").children).toHaveLength(
     testData.length
   );
@@ -56,6 +57,7 @@ test("the shopping filters based on the search term to include full matches", ()
     target: { value: "Yogurt" },
   });
 
+  // eslint-disable-next-line testing-library/prefer-presence-queries
   expect(screen.queryByText("Yogurt")).toBeInTheDocument();
   expect(screen.queryByText("Lettuce")).not.toBeInTheDocument();
 
@@ -63,6 +65,7 @@ test("the shopping filters based on the search term to include full matches", ()
     target: { value: "Lettuce" },
   });
 
+  // eslint-disable-next-line testing-library/prefer-presence-queries
   expect(screen.queryByText("Lettuce")).toBeInTheDocument();
   expect(screen.queryByText("Yogurt")).not.toBeInTheDocument();
 });
@@ -74,7 +77,9 @@ test("the shopping filters based on the search term to include partial matches",
     target: { value: "Cheese" },
   });
 
+  // eslint-disable-next-line testing-library/prefer-presence-queries
   expect(screen.queryByText("Swiss Cheese")).toBeInTheDocument();
+  // eslint-disable-next-line testing-library/prefer-presence-queries
   expect(screen.queryByText("String Cheese")).toBeInTheDocument();
   expect(screen.queryByText("Lettuce")).not.toBeInTheDocument();
   expect(screen.queryByText("Yogurt")).not.toBeInTheDocument();
